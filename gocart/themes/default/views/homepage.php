@@ -91,8 +91,8 @@
 				<div class="col-md-12">
 					<h1>The Ceremony</h1>
 					<h3><span>Will Be Held On</span></h3>
-					<h2>09 - 09 - 2015</h2>
-					<h5><span>~ September ~</span></h5>
+					<h2>17 - 10 - 2015</h2>
+					<h5><span>~ October ~</span></h5>
 					<h4>Dynasty Dragon Seafood Restaurant</h4>
 				</div>
 			</div>
@@ -217,7 +217,7 @@
 								<!-- begin:content-photo -->
 								<li class="content-item content-photo">
 									<img src="<?php echo base_url('uploads/gallery/full/romantic_1.jpg') ?>" alt="ditinggal rabi - sleep together">
-									<time datetime=""><i class="fa fa-calendar"></i> September, 28 2014</time>	
+									<time datetime=""><i class="fa fa-calendar"></i> October, 17 2015</time>	
 								</li>
 								<!-- end:content-photo -->
 
