@@ -1,6 +1,6 @@
     <hr/>
     <footer>
-    	copyright 2014
+    	Jack and Chloe copyright 2015
     </footer>
 </div>
 

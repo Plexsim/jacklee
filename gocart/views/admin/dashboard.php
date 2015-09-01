@@ -15,7 +15,7 @@
 
 <?php endif;?>
 
-<strong> Welcome to Thunder Match Back End. </strong>
+<strong> Welcome to Jack and Chloe Back End. </strong>
 
 <!--h2><?php echo lang('recent_orders') ?></h2>
 <table class="table table-striped">

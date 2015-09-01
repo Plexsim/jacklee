@@ -186,7 +186,7 @@ class Settings extends Admin_Controller {
     		{
     			if($data['wife_image'] != '')
     			{
-    				$file = 'uploads/gallery/full/'.$data['image'];
+    				$file = 'uploads/gallery/full/'.$data['wife_image'];
     		
     				//delete the existing file if needed
     				if(file_exists($file))
@@ -261,7 +261,7 @@ class Settings extends Admin_Controller {
     		{
     			if($data['husband_image'] != '')
     			{
-    				$file = 'uploads/gallery/full/'.$data['image'];
+    				$file = 'uploads/gallery/full/'.$data['husband_image'];
     
     				//delete the existing file if needed
     				if(file_exists($file))
