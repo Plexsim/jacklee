@@ -26,6 +26,23 @@ $lang['message_deleted_message'] = 'The message has been deleted.';
 $lang['config_updated_message'] = 'GoCart configuration has been updated.';
 $lang['status_exists_error'] = 'The requested status already exists.';
 $lang['confirm_delete_order_status'] = 'Are you sure you want to remove this order status?';
+$lang['gps_updated_message'] = 'Wedding Location has been updated.';
+$lang['location_gps_setting'] = 'Location GPS Setting';
+$lang['wife_updated_message'] = 'Wife has been updated';
+$lang['husband_updated_message'] = 'Husband has been updated';
+$lang['wife_setting'] = 'Wife Setting';
+$lang['husband_setting'] = 'Husband Setting';
+$lang['full_name'] 		= 'Full Name';
+$lang['wife_name'] 		= 'Wife Name';
+$lang['wife_description'] 		= 'Wife Description';
+$lang['husband_name'] 			= 'Husband Name';
+$lang['husband_description'] 	= 'Husband Description';
+$lang['wife_image'] 			= 'Wife Image';
+$lang['husband_image'] 			= 'Husband Image';
+
+$lang['description'] 			= 'Description';
+$lang['image'] 					= 'Image';
+
 
 $lang['save_canned_message'] = 'Save Message';
 $lang['tab_canned_info'] = 'Message Info';
@@ -47,6 +64,8 @@ $lang['tax_settings'] = 'Tax Settings';
 $lang['theme'] = 'GoCart Theme';
 $lang['ssl_support'] = 'Use SSL';
 $lang['company_name'] = 'Shop Name';
+$lang['address'] = 'Address';
+$lang['gps'] = 'GPS';
 $lang['address1'] = 'Address';
 $lang['address2'] = 'Address 2';
 $lang['country'] = 'Country';

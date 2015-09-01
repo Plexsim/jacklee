@@ -17,8 +17,8 @@
 <?php if(isset($meta)):?>	
 	<meta name="description" content="<?php echo $meta;?>" />	
 <?php else:?>
-<meta name="Keywords" content="Jack and Ho Yan, Plexsim, Orack">
-<meta name="Description" content="Thunder Match Technology Sdn Bhd">
+<meta name="Keywords" content="Jack and Ho Yan, Plexsim">
+<meta name="Description" content="Wedding of Jack Lee and Ho yan">
 <?php endif;?>
 	
 

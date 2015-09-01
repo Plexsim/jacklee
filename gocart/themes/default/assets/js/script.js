@@ -39,6 +39,7 @@ $(document).ready(function() {
 	/**
 	* Display map in contact section using gmap 3
 	**/
+    var gps = $('#gps').val();   
 	$("#maps").gmap3({
 		 map:{
 		    options:{

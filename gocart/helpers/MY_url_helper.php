@@ -6,6 +6,12 @@ function theme_url($uri)
 	return $CI->config->base_url('gocart/themes/'.config_item('theme').'/'.$uri);
 }
 
+function gallery_url($uri)
+{
+	$CI =& get_instance();
+	return $CI->config->base_url('uploads/gallery/full/'.$uri);
+}
+
 //to generate an image tag, set tag to true. you can also put a string in tag to generate the alt tag
 function theme_img($uri, $tag=false)
 {
@@ -46,4 +52,17 @@ function theme_css($uri, $tag=false)
 	}
 	
 	return theme_url('assets/css/'.$uri);
+}
+
+function gallery_img($uri, $tag=false)
+{
+	if($tag)
+	{
+		return '<img src="'.gallery_url($uri).'" alt="'.$tag.'">';
+	}
+	else
+	{
+		return gallery_url($uri);
+	}
+
 }

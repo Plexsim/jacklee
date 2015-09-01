@@ -108,6 +108,190 @@ class Settings extends Admin_Controller {
         }
         
     }
+    
+    function gps_setting()
+    {
+    	$this->load->helper('form');
+    	$this->load->library('form_validation');
+        		
+    	$this->form_validation->set_rules('address', 'lang:address','required');
+    	$this->form_validation->set_rules('gps', 'lang:gps','required');
+    
+    	$data = $this->Settings_model->get_settings('gocart');
+    
+    	$data['page_title'] = lang('common_gps_setting');    	
+    	
+    	
+    	if ($this->form_validation->run() == FALSE)
+    	{
+    		$data['error'] = validation_errors();
+    		$this->view($this->config->item('admin_folder').'/gps_setting', $data);
+    	}
+    	else
+    	{
+    		$this->session->set_flashdata('message', lang('gps_updated_message'));
+    	
+    		$save = $this->input->post();
+    		//fix boolean values
+    		$save['address'] = $this->input->post('address');
+    		$save['gps'] = $this->input->post('gps');    		
+    		$this->Settings_model->save_settings('gocart', $save);
+    	
+    		redirect(config_item('admin_folder').'/settings/gps_setting');
+    	}
+    
+    }
+    
+    function wife_setting()
+    {
+    	$this->load->helper('form');
+    	$this->load->library('form_validation');
+    	
+    	$this->load->helper('url');
+    	$this->load->helper('form');
+    	
+    	$config['upload_path']		= 'uploads/gallery/full';
+    	$config['allowed_types']	= 'gif|jpg|png';
+    	$config['max_size']			= $this->config->item('size_limit');
+    	$config['encrypt_name']		= true;
+    	$this->load->library('upload', $config);    	
+    
+    	$this->form_validation->set_rules('wife_name', 'lang:wife_name','required');
+    	$this->form_validation->set_rules('wife_description', 'lang:wife_description');
+    	$this->form_validation->set_rules('wife_image', 'lang:wife_image', 'trim');
+    
+    	$data = $this->Settings_model->get_settings('gocart');    
+    	$data['page_title'] = lang('common_wife_setting');
+    	 
+    	if ($this->form_validation->run() == FALSE)
+    	{
+    		$data['error'] = validation_errors();
+    		$this->view($this->config->item('admin_folder').'/wife_setting', $data);
+    	}
+    	else
+    	{
+    		
+    		$this->load->helper('text');
+    		 
+    		$uploaded	= $this->upload->do_upload('wife_image');    		 
+    		$save = array();
+    		 
+    		$save = $this->input->post();
+    		//fix boolean values
+    		$save['wife_name'] 	 = $this->input->post('wife_name');
+    		$save['wife_description'] = $this->input->post('wife_description');
+    		    		
+    		//delete the original file if another is uploaded
+    		if($uploaded)
+    		{
+    			if($data['wife_image'] != '')
+    			{
+    				$file = 'uploads/gallery/full/'.$data['image'];
+    		
+    				//delete the existing file if needed
+    				if(file_exists($file))
+    				{
+    					unlink($file);
+    				}
+    			}
+    		}
+    		
+    		if(!$uploaded)
+    		{
+    			$data['error']	= $this->upload->display_errors();
+    			$this->view(config_item('admin_folder').'/wife_setting', $data);
+    			return; //end script here if there is an error
+    		}
+    		
+    		if($uploaded)
+    		{
+    			$image			= $this->upload->data();
+    			$save['wife_image']	= $image['file_name'];
+    		}
+    		
+    		$this->session->set_flashdata('message', lang('wife_updated_message'));
+    		$this->Settings_model->save_settings('gocart', $save);
+    		 
+    		redirect(config_item('admin_folder').'/settings/wife_setting');
+    	}   
+
+    }
+    
+    function husband_setting()
+    {
+    	$this->load->helper('form');
+    	$this->load->library('form_validation');
+    	 
+    	$this->load->helper('url');
+    	$this->load->helper('form');
+    	 
+    	$config['upload_path']		= 'uploads/gallery/full';
+    	$config['allowed_types']	= 'gif|jpg|png';
+    	$config['max_size']			= $this->config->item('size_limit');
+    	$config['encrypt_name']		= true;
+    	$this->load->library('upload', $config);
+    
+    	$this->form_validation->set_rules('husband_name', 'lang:husband_name','required');
+    	$this->form_validation->set_rules('husband_description', 'lang:husband_description');
+    	$this->form_validation->set_rules('husband_image', 'lang:husband_image', 'trim');
+    
+    	$data = $this->Settings_model->get_settings('gocart');
+    	$data['page_title'] = lang('common_husband_setting');
+    
+    	if ($this->form_validation->run() == FALSE)
+    	{
+    		$data['error'] = validation_errors();
+    		$this->view($this->config->item('admin_folder').'/husband_setting', $data);
+    	}
+    	else
+    	{
+    
+    		$this->load->helper('text');
+    		 
+    		$uploaded	= $this->upload->do_upload('husband_image');
+    		$save = array();
+    		 
+    		$save = $this->input->post();
+    		//fix boolean values
+    		$save['husband_name'] 	 = $this->input->post('husband_name');
+    		$save['husband_description'] = $this->input->post('husband_description');
+    
+    		//delete the original file if another is uploaded
+    		if($uploaded)
+    		{
+    			if($data['husband_image'] != '')
+    			{
+    				$file = 'uploads/gallery/full/'.$data['image'];
+    
+    				//delete the existing file if needed
+    				if(file_exists($file))
+    				{
+    					unlink($file);
+    				}
+    			}
+    		}
+    
+    		if(!$uploaded)
+    		{
+    			$data['error']	= $this->upload->display_errors();
+    			$this->view(config_item('admin_folder').'/husband_setting', $data);
+    			return; //end script here if there is an error
+    		}
+    
+    		if($uploaded)
+    		{
+    			$image			= $this->upload->data();
+    			$save['husband_image']	= $image['file_name'];
+    		}
+    
+    		$this->session->set_flashdata('message', lang('husband_updated_message'));
+    		$this->Settings_model->save_settings('gocart', $save);
+    		 
+    		redirect(config_item('admin_folder').'/settings/husband_setting');
+    	}
+    
+    }
+    
 
     function canned_messages()
     {

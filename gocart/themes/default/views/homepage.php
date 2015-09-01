@@ -52,11 +52,11 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-4">
-						<h2>Jack Lee</h2>
-						<p>Jack Lee, 21 Tahun who people called him Datuk Lee</p>
+						<h2><?php echo $rs_setting['husband_name']?></h2>
+						<p><?php echo $rs_setting['husband_description']?></p>
 						<blockquote>
 							Huat a ~
-							<small>Jack Lee</small>
+						<small><?php echo $rs_setting['husband_name']?></small>
 						</blockquote>
 					</div>
 					<!-- break -->
@@ -68,12 +68,11 @@
 					<!-- break -->
 
 					<div class="col-md-4">
-						<h2>Chloe Fong</h2>
-						<p>Chloe Fong, 21 Tahun. Wanita yang murah senyum, tinggi, langsing.
-						Hobi ialah suka teman dengan Jack Lee.</p>
+						<h2><?php echo $rs_setting['wife_name']?></h2>
+						<p><?php echo $rs_setting['wife_description']?></p>
 						<blockquote>
 							Ong a ~
-							<small>Chloe Fong</small>
+							<small><?php echo $rs_setting['wife_name']?></small>
 						</blockquote>
 					</div>
 					<!-- break -->
@@ -113,65 +112,44 @@
 
 				<div class="col-md-8">
 					<div id="wedding-photo" class="carousel slide" data-ride="carousel">
-				      <div class="carousel-inner">
-				        <div class="item">
-				          <div class="row">
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInLeftBig">	
-				          		<a href="<?php echo base_url('uploads/gallery/full/img01.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img01.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInDownBig">
-				          		<a href="<?php echo base_url('uploads/gallery/full/img02.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img02.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInRightBig">
-				          		<a href="<?php echo base_url('uploads/gallery/full/img03.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img03.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          </div>
-				        </div>
-				        <div class="item active">
-				          <div class="row">
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInRightBig">	
-				          		<a href="<?php echo base_url('uploads/gallery/full/img04.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img04.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInUpBig">
-				          		<a href="<?php echo base_url('uploads/gallery/full/img05.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img05.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInLeftBig">
-				          		<a href="<?php echo base_url('uploads/gallery/full/img06.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img06.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          </div>
-				        </div>
-				        <div class="item">
-				          <div class="row">
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInLeftBig">	
-				          		<a href="<?php echo base_url('uploads/gallery/full/img07.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img07.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInDownBig">
-				          		<a href="<?php echo base_url('uploads/gallery/full/img08.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img08.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          	<div class="col-md-4 col-sm-4 col-xs-12 animated fadeInRightBig">
-				          		<a href="<?php echo base_url('uploads/gallery/full/img09.jpg') ?>" class="gallery-images">
-				          			<div class="photo-gallery" style="background: url(<?php echo base_url('uploads/gallery/full/img09.jpg') ?>);"></div>
-				          		</a>
-				          	</div>
-				          </div>
-				        </div>
-				       
+				      <div class="carousel-inner">				      
+				      	<?php 
+				      		$row = 1;
+				      		$row_content = '';
+				      		$total_row = 1;
+				      		$active = '';				      						      		
+				      		foreach($rs_gallery as $gallery):				      						      		
+					      		if($row == 1):
+					      			if($total_row < 3):
+					      				$active = 'active';
+					      			else:
+					      				$active = '';
+					      			endif;
+					      			
+					      			$row_content .= '<div class="item '.$active.'"><div class="row">';
+					      			
+					      		endif;
+					      		
+					      		$effect = array("fadeInLeftBig","fadeInDownBig","fadeInRightBig","fadeInUpBig");
+					      		$random_keys = array_rand($effect,1);
+					      		
+					      		$row_content .= '<div class="col-md-4 col-sm-4 col-xs-12 animated '.$effect[$random_keys].'">';
+	          					$row_content .= '<a href="'.gallery_img($gallery['image']).'" class="gallery-images">';
+	          					$row_content .= '<div class="photo-gallery" style="background: url('.gallery_img($gallery['image']).');"></div>';
+	          					$row_content .= '</a></div>';
+					      			          						          					
+								if($total_row == sizeof($rs_gallery) || $row == 3):				      											
+					      			$row_content .= '</div></div>';
+					      			$row = 0;				      							      			
+					      		endif;				      						      	
+					      	
+					      		$total_row ++;
+					      		$row ++;
+				      		endforeach;
+				      		
+				      		echo $row_content;				      		 
+				      	?>
+				       	
 				      </div>
 				      <a class="left carousel-control" href="#wedding-photo" data-slide="prev">
 				        <span class="glyphicon glyphicon-chevron-left"></span>
@@ -195,34 +173,49 @@
 					<ul class="content">
 						<li>
 							<h3 class="content-avatar avatar-top">
-								<div class="img-avatar" style="background: url(<?php echo base_url('uploads/gallery/full/ho_yan2.jpg') ?>);"></div>
+								<div class="img-avatar" style="background: url(<?php echo gallery_img($rs_setting['wife_image']) ?>);"></div>
 							</h3>
 							<ul>
+							
+							
 								<!-- begin:content-text -->
-								<li class="content-item content-text">
+								<!--li class="content-item content-text">
 									<h3>Jack :"></h3>
 									<div class="text">I meet you at the first time. I smile, and you don't smile back to me. I was silent, and you laugh out loud alone. It's so romantic epic. :))</div>
 									<time datetime=""><i class="fa fa-calendar"></i> December, 19 2004</time>
-								</li>
+								</li-->
 								<!-- end:content-text -->
 
-								<!-- begin:content-photo -->
+								
+							
+								<?php foreach($rs_story as $story):?>
+																
 								<li class="content-item content-photo">
+									<img src="<?php echo gallery_img($story['image']) ?>" alt="ditinggal rabi - together">	
+									<p class="caption"><?php echo $story['title']?></p>
+									<!-- time datetime=""><i class="fa fa-calendar"></i> January, 19 2005</time-->
+								</li>
+								
+								<?php endforeach;?>
+							
+								<!-- begin:content-photo -->
+								<!--li class="content-item content-photo">
 									<img src="<?php echo base_url('uploads/gallery/full/romantic_2.jpg') ?>" alt="ditinggal rabi - together">	
 									<p class="caption">At the first date, we ate ice cream together. We enjoyed the evening. Sitting on the Waja along the way back to home. Telling each other ....</p>
 									<time datetime=""><i class="fa fa-calendar"></i> January, 19 2005</time>
-								</li>
+								</li-->
 								<!-- end:content-photo -->
 
+								
 								<!-- begin:content-photo -->
-								<li class="content-item content-photo">
+								<!--li class="content-item content-photo">
 									<img src="<?php echo base_url('uploads/gallery/full/romantic_1.jpg') ?>" alt="ditinggal rabi - sleep together">
 									<time datetime=""><i class="fa fa-calendar"></i> October, 17 2015</time>	
-								</li>
+								</li-->
 								<!-- end:content-photo -->
 
 								<!-- begin:content-chat -->
-								<li class="content-item content-chat">
+								<!--li class="content-item content-chat">
 									<p class="text chat odd">A : Sist..</p>
 									<p class="text chat even">B : Yeah..</p>
 									<p class="text chat odd">A : Sist..</p>
@@ -230,24 +223,24 @@
 									<p class="text chat odd">A : Would you be..</p>
 									And then silence....
 									<time datetime=""><i class="fa fa-calendar"></i> January, 26 2005</time>
-								</li>
+								</li-->
 								<!-- end:content-chat -->
 
 								<!-- begin:content-quote -->
-								<li class="content-item content-quote">
+								<!--li class="content-item content-quote">
 									<blockquote>
 										<p>I do not promise anything, I can only promise one thing. I would still handsome until tomorrow... <small>Jack Lee</small></p>
 										<time datetime=""><i class="fa fa-calendar"></i> March, 26 2014</time>
 									</blockquote>
-								</li>
+								</li-->
 								<!-- end:content-quote -->
 
 								<!-- begin:content-photo -->
-								<li class="content-item content-photo">
+								<!--li class="content-item content-photo">
 									<img src="<?php echo theme_img('img07.jpg') ?>" alt="ditinggal rabi - wedding ring">
 									<p class="caption">And finally, we are now getting married. :')</p>
 									<time datetime=""><i class="fa fa-calendar"></i> September, 09 2015</time>
-								</li>
+								</li-->
 								<!-- end:content-photo -->
 
 								
@@ -256,8 +249,8 @@
 
 						<li class="content-end">
 							<h3 class="content-avatar avatar-end">
-								<div class="img-avatar" style="background: url(<?php echo base_url('uploads/gallery/full/jack.jpg') ?>);"></div>
-							</h3>
+								<div class="img-avatar" style="background: url(<?php echo gallery_img($rs_setting['husband_image']) ?>);"></div>
+							</h3>							
 						</li>
 					</ul>
 				</div>
@@ -265,26 +258,54 @@
 		</div>
 	</section>
 	<!-- end:story -->
-	
+	<section>
+					
+		<?php if ($this->session->flashdata('message')):?>
+		<div class="alert alert-info">
+			<a class="close" data-dismiss="alert">X</a>
+			<?php echo $this->session->flashdata('message');?>
+		</div>
+		<?php endif;?>
+		
+		<?php if ($this->session->flashdata('error')):?>
+		<div class="alert alert-error">
+			<a class="close" data-dismiss="alert">X</a>
+			<?php echo $this->session->flashdata('error');?>
+		</div>
+		<?php endif;?>
+		
+		<?php if (!empty($error)):?>
+		<div class="alert alert-error">
+			<a class="close" data-dismiss="alert">X</a>
+			<?php echo $error;?>
+		</div>
+		<?php endif;?>
+	</section>
+		
 	<!-- begin:contact -->
-	<section id="contact">
+		<section id="contact">
+		
+	
 		<div id="maps"></div>
+		<input type="hidden" class="form-control" id="gps" value="<?php echo $rs_setting['gps'] ?>">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
 					<h2>Contact Us</h2>
 					<div class="contact-container">
 						<div class="row">
-							<form>
+							<?php echo form_open('cart/contact'); ?>
 							<div class="col-md-6 col-sm-6">
-								<textarea rows="7" class="form-control no-resize" placeholder="Message"></textarea>
+								<textarea name="message" class="form-control " placeholder="Message" required rows="6"><?php echo set_value('message')?></textarea>								
 							</div>
 							<!-- break -->
 
 							<div class="col-md-6 col-sm-6">
-								<input type="text" class="form-control" placeholder="Name">
-								<input type="email" class="form-control" placeholder="Email">
+								<input name="name" id="name" type="text" placeholder="Name" required class="form-control" value="<?php echo set_value('name')?>">
+								<input name="email" id="email" type="email" placeholder="Email" required class="form-control" value="<?php echo set_value('email')?>">								
 								<input type="submit" value="Submit" class="btn btn-lg btn-green" />
+								<input type="hidden" value="submitted" name="submitted"/>
+								
 							</div>
 							</form>
 						</div>

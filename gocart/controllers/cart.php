@@ -4,7 +4,7 @@ class Cart extends Front_Controller {
 
 	function index()
 	{
-		$this->load->model(array('Banner_model','content_custom_model','Sidebar_model'));
+		$this->load->model(array('Banner_model','content_custom_model','Sidebar_model','Settings_model','Story_model', 'Gallery_model'));
 		$this->load->helper('directory');
 		
 		$data['gift_cards_enabled'] = $this->gift_cards_enabled;
@@ -17,7 +17,10 @@ class Cart extends Front_Controller {
 		$data['rs_feature_items'] 	= $this->Product_model->get_new_arrival($config['per_page'], $page, $sort_by['by'], $sort_by['sort']);		
 		$data['rs_content_custom'] 	= $this->content_custom_model->display_one_content();
 		$data['rs_sidebar'] 		= $this->Sidebar_model->display_one_content();
-		//echo var_dump($data['rs_feature_items']);
+		
+		$data['rs_setting'] 		= $this->Settings_model->get_settings('gocart');
+		$data['rs_story'] 			= $this->Story_model->get_list();
+		$data['rs_gallery'] 			= $this->Gallery_model->get_list();
 		
 		$data['homepage']			= true;
 		$data['base_url']			= $this->uri->segment_array();
@@ -68,8 +71,7 @@ class Cart extends Front_Controller {
 	}	
 	
 	function contact()
-	{		
-		
+	{				
 		$data['page_title'] = lang('contact_us');
 		
 		$this->load->library('form_validation');
@@ -77,12 +79,17 @@ class Cart extends Front_Controller {
 		$submitted 	= $this->input->post('submitted');
 		$data['error'] = '';
 		$data['base_url'] = 'contact';
+		$data['rs_setting'] = $this->Settings_model->get_settings('gocart');
 		
 		if ($submitted){
-		
+			
+			$name	  	= $this->input->post('name');
+			$email		= $this->input->post('email');
+			$message  	= $this->input->post('message');		
+			
 			$this->form_validation->set_rules('name', 'Name', 'required|max_length[100]');
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|max_length[128]|callback_check_email');
-			$this->form_validation->set_rules('subject', 'Subject', 'required');
+			//$this->form_validation->set_rules('subject', 'Subject', 'required');
 			$this->form_validation->set_rules('message', 'Message', 'required');
 				
 			if ($this->form_validation->run() == FALSE)
@@ -91,7 +98,8 @@ class Cart extends Front_Controller {
 			}else{
 				$name	  	= $this->input->post('name');
 				$email		= $this->input->post('email');
-				$subject   	= $this->input->post('subject');
+				//$subject   	= $this->input->post('subject');
+				$subject   	= 'Wedding Inquiry';
 				$message  	= $this->input->post('message');
 					
 				$this->load->library('email');
@@ -105,11 +113,12 @@ class Cart extends Front_Controller {
 				$this->email->send();
 		
 				$this->session->set_flashdata('message', 'Hi '. $name. '. Thank you! We will response you as soon as possible.');
-				redirect(current_url());
+				//redirect(current_url());
+				redirect('cart');
 			}
 		}
 		
-		$this->view('contact', $data);
+		$this->view('homepage', $data);
 	}
 	
 	function page($id = false)

@@ -44,10 +44,17 @@ $lang['common_memberships'] = 'Memberships';
 $lang['common_outlet'] = 'Outlet';
 $lang['common_price_list'] = 'Price List';
 $lang['common_event'] = 'Event';
+$lang['common_wedding_location'] = 'Wedding Location';
+$lang['common_story'] = 'Story';
+$lang['common_wife_setting'] = 'Wife Setting';
+$lang['common_husband_setting'] = 'Husband Setting';
+$lang['common_gallery'] = 'Gallery';
+
 $lang['enabled'] = 'Enabled';
 $lang['disabled'] = 'Disabled';
 $lang['yes'] = 'Yes';
 $lang['no'] = 'No';
+$lang['common_gps_setting'] = 'GPS Setting';
 //buttons
 $lang['save'] = 'Save';
 $lang['edit'] = 'Edit';
